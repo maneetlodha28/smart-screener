@@ -1,6 +1,5 @@
 from __future__ import annotations
 
-
 from datetime import date, datetime
 from enum import Enum
 from typing import Optional
@@ -38,6 +37,7 @@ class IngestionRun(Base):
 
     id: Mapped[int] = mapped_column(Integer, primary_key=True)
     run_at: Mapped[datetime] = mapped_column(DateTime, nullable=False, default=datetime.utcnow)
+
 
 class Metric(Base):
     __tablename__ = "metrics"
