@@ -1,6 +1,7 @@
 from functools import lru_cache
 from typing import Literal, List
 
+
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
@@ -13,6 +14,7 @@ class Settings(BaseSettings):
     AI_PROVIDER: Literal["mock", "openai"] = "mock"
     AI_API_KEY: str | None = None
     CORS_ORIGINS: List[str] = ["http://localhost:5173"]
+
 
     model_config = SettingsConfigDict(env_file=".env", case_sensitive=True)
 

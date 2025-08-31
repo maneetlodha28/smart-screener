@@ -55,6 +55,7 @@ class ScreenResponse(BaseModel):
     disclaimer: str
 
 
+
 class InterpretRequest(BaseModel):
     """Request payload for the /interpret endpoint."""
 

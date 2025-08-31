@@ -1,17 +1,21 @@
+
 import logging
 import time
+
 import uuid
 
 from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 from pydantic import BaseModel
+
 from slowapi import _rate_limit_exceeded_handler  # type: ignore[import-not-found]
 from slowapi.errors import RateLimitExceeded  # type: ignore[import-not-found]
 
 from app.core.rate_limit import limiter
 
 from app.api.metrics import router as metrics_router
+
 from app.api.routes import router as api_router
 from app.core.config import get_settings
 from app.core.logging import configure_logging, request_id_ctx_var
@@ -19,6 +23,7 @@ from app.core.logging import configure_logging, request_id_ctx_var
 
 class HealthResponse(BaseModel):
     status: str
+
 
 
 configure_logging()
@@ -29,12 +34,14 @@ settings = get_settings()
 app.add_middleware(
     CORSMiddleware,
     allow_origins=settings.CORS_ORIGINS,
+
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
 app.include_router(api_router)
 app.include_router(metrics_router)
+
 
 
 @app.middleware("http")
@@ -85,17 +92,18 @@ async def unhandled_exception_handler(request: Request, exc: Exception):
     )
 
 
+
 @app.on_event("startup")
 async def startup() -> None:
     settings = get_settings()
     app.state.start_time = time.time()
+
     logger = logging.getLogger("app")
     logger.setLevel(settings.LOG_LEVEL)
     logger.info(
         "startup",
         extra={"app_env": settings.APP_ENV, "log_level": settings.LOG_LEVEL},
     )
-
 
 @app.get("/health", response_model=HealthResponse)
 async def health() -> HealthResponse:

@@ -42,6 +42,7 @@ def recommend_portfolio(
         inst = inst_repo.get_by_symbol(alloc.symbol)
         if inst is None:
             continue
+
         metric = metric_repo.latest_by_instrument(alloc.symbol)
 
         instruments_payload.append(
@@ -79,4 +80,5 @@ def recommend_portfolio(
             "instruments": instrument_explanations,
         },
         "disclaimer": DISCLAIMER,
+
     }
