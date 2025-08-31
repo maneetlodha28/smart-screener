@@ -1,11 +1,11 @@
 from __future__ import annotations
 
+
 from datetime import date, datetime
 from enum import Enum
 from typing import Optional
 
 from sqlalchemy import Date, Enum as SqlEnum, Float, ForeignKey, Integer, String
-from sqlalchemy import DateTime
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from .base import Base
@@ -32,12 +32,12 @@ class Instrument(Base):
     metrics: Mapped[list["Metric"]] = relationship(back_populates="instrument")
 
 
+
 class IngestionRun(Base):
     __tablename__ = "ingestion_runs"
 
     id: Mapped[int] = mapped_column(Integer, primary_key=True)
     run_at: Mapped[datetime] = mapped_column(DateTime, nullable=False, default=datetime.utcnow)
-
 
 class Metric(Base):
     __tablename__ = "metrics"
