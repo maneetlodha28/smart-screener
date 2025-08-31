@@ -37,3 +37,7 @@ strict = true
 [project.scripts]
 seed-instruments = "app.cli.seed:main"
 ingest-metrics = "app.cli.ingest:main"
+
+[build-system]
+requires = ["setuptools", "wheel"]
+build-backend = "setuptools.build_meta"

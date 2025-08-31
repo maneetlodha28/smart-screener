@@ -13,7 +13,7 @@ class Settings(BaseSettings):
     DATABASE_URL: str = "sqlite:///:memory:"
     AI_PROVIDER: Literal["mock", "openai"] = "mock"
     AI_API_KEY: str | None = None
-    CORS_ORIGINS: List[str] = ["http://localhost:5173"]
+    CORS_ORIGINS: List[str] = ["*"]
 
 
     model_config = SettingsConfigDict(env_file=".env", case_sensitive=True)

@@ -8,7 +8,7 @@ export interface HealthResponse {
   status: string;
 }
 
-const BASE_URL = import.meta.env.VITE_API_BASE_URL || '';
+const BASE_URL = 'https://silver-space-meme-g5r5j4945v4fppvq-8000.app.github.dev';
 
 export async function fetchHealth(): Promise<HealthResponse> {
   const res = await fetch('/health');
