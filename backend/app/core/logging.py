@@ -14,8 +14,8 @@ class JSONFormatter(logging.Formatter):
     def format(self, record: logging.LogRecord) -> str:  # type: ignore[override]
         data: Dict[str, Any] = {
             "level": record.levelname,
-            "message": record.getMessage(),
-            "timestamp": self.formatTime(record, self.datefmt),
+            "msg": record.getMessage(),
+            "ts": self.formatTime(record, self.datefmt),
         }
         request_id = getattr(record, "request_id", None) or request_id_ctx_var.get()
         if request_id:

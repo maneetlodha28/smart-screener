@@ -99,6 +99,7 @@ def test_recommend_text_only():
     assert 1 <= len(data["allocations"]) <= 5
     assert sum(a["percent"] for a in data["allocations"]) == 100
     assert "portfolio" in data["explanations"]
+    assert data["disclaimer"]
 
     app.dependency_overrides.clear()
 
@@ -118,6 +119,8 @@ def test_recommend_overrides_take_precedence():
     assert response.status_code == 200
     data = response.json()
     assert "aggressive" in data["explanations"]["portfolio"].lower()
+    assert data["disclaimer"]
+
 
     app.dependency_overrides.clear()
 

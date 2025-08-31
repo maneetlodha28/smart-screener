@@ -52,6 +52,8 @@ class ScreenResponse(BaseModel):
     allocations: List[Allocation]
     instruments: List[InstrumentPayload]
     explanations: ExplanationsPayload
+    disclaimer: str
+
 
 
 class InterpretRequest(BaseModel):

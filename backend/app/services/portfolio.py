@@ -6,8 +6,9 @@ from sqlalchemy.orm import Session
 
 from app.domain.mapping import Goal, RiskProfile, map_intent_to_filters
 from app.domain.filtering import filter_candidates
-from app.domain.allocation import AllocationItem, allocate
+from app.domain.allocation import allocate
 from app.domain.explain import explain_instrument, explain_portfolio
+from app.core.constants import DISCLAIMER
 from app.repositories.metrics import MetricRepository
 from app.repositories.instruments import InstrumentRepository
 
@@ -39,6 +40,9 @@ def recommend_portfolio(
 
     for alloc in allocations:
         inst = inst_repo.get_by_symbol(alloc.symbol)
+        if inst is None:
+            continue
+
         metric = metric_repo.latest_by_instrument(alloc.symbol)
 
         instruments_payload.append(
@@ -75,4 +79,6 @@ def recommend_portfolio(
             "portfolio": portfolio_text,
             "instruments": instrument_explanations,
         },
+        "disclaimer": DISCLAIMER,
+
     }

@@ -100,3 +100,4 @@ def test_recommend_portfolio_balanced_growth():
     explanations = result["explanations"]
     assert explanations["portfolio"]
     assert len(explanations["instruments"]) == 3
+    assert result["disclaimer"]
