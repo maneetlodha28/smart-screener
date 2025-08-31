@@ -33,5 +33,5 @@ def test_startup_logs_are_json(caplog) -> None:
     formatter = logging.getLogger().handlers[0].formatter
     line = formatter.format(record)
     parsed = json.loads(line)
-    assert parsed["message"] == "startup"
+    assert parsed["msg"] == "startup"
     assert "app_env" in parsed

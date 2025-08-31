@@ -105,6 +105,7 @@ def test_screen_endpoint_returns_portfolio():
     assert len(data["allocations"]) == 3
     assert sum(a["percent"] for a in data["allocations"]) == 100
     assert "portfolio" in data["explanations"]
+    assert data["disclaimer"]
 
     app.dependency_overrides.clear()
 
