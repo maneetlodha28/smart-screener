@@ -1,3 +1,4 @@
+
 import logging
 import uuid
 
@@ -11,8 +12,10 @@ from app.core.config import get_settings
 from app.core.logging import configure_logging, request_id_ctx_var
 
 
+
 class HealthResponse(BaseModel):
     status: str
+
 
 
 configure_logging()
@@ -65,15 +68,18 @@ async def unhandled_exception_handler(request: Request, exc: Exception):
     )
 
 
+
 @app.on_event("startup")
 async def startup() -> None:
     settings = get_settings()
+
     logger = logging.getLogger("app")
     logger.setLevel(settings.LOG_LEVEL)
     logger.info(
         "startup",
         extra={"app_env": settings.APP_ENV, "log_level": settings.LOG_LEVEL},
     )
+
 
 
 @app.get("/health", response_model=HealthResponse)

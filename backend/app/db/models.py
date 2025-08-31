@@ -5,7 +5,6 @@ from enum import Enum
 from typing import Optional
 
 from sqlalchemy import Date, Enum as SqlEnum, Float, ForeignKey, Integer, String
-from sqlalchemy import DateTime
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from .base import Base
@@ -30,6 +29,7 @@ class Instrument(Base):
     exchange: Mapped[str] = mapped_column(String, nullable=False, default="NSE")
 
     metrics: Mapped[list["Metric"]] = relationship(back_populates="instrument")
+
 
 
 class IngestionRun(Base):
